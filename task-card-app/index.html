@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Task card app </title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> 
+
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        
+        
+        <header>
+            <div id="header-buttons">
+                <button class="active-tasks"> Active Tasks </button>
+                <button class="completed-tasks"> Completed </button>
+            </div>
+        
+            <div id="input-container"> 
+            <input type="text" placeholder="Add task here!" class="task-input">
+            <button class="add-button"> + </button>
+            </div>
+        </header>
+        
+        
+        <div class="task-container"></div>
+        
+        
+        <div class="progress-section">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            <p class="progress-text">0 out of 0 tasks completed</p>
+            </div>
+        </div>
+            
+        <script src="script.js"></script>
+
+
+        
+    </body>
+</html>
