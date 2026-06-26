@@ -119,7 +119,7 @@ function addFunc() {
         setTimeout(() => {
 
             const message = document.createElement("p");
-            message.classList.add("status-message");
+            message.classList.add("completing-message");
             message.textContent = "✅ Completed";
 
             taskContainer.insertBefore(message, taskCard);
@@ -139,7 +139,28 @@ function addFunc() {
 
     // deletes a task
     delTask.addEventListener("click", () => {
-        taskCard.remove();
+
+        taskCard.classList.add("completing");
+
+        setTimeout(() => {
+
+            const delMessage = document.createElement("p");
+            delMessage.classList.add("deleting-message");
+            delMessage.textContent = "🗑️ Task deleted";
+
+            taskContainer.insertBefore(delMessage, taskCard);
+            
+            taskCard.remove();
+
+            setTimeout(() => {
+                delMessage.remove();
+            }, 1500);
+
+            updateTasks();
+
+        }, 350);
+
+        
     });
 
 

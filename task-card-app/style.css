@@ -29,7 +29,7 @@ body {
     --green2: #40823b;
     --green3: #436040;
 
-    --red1: #b55e5e;
+    --red1: #d16c6c;
     --red2: #902c2c;
     --red3: #672020;
 
@@ -226,8 +226,9 @@ i {
     background-color: var(--red3);
 }
 
-.status-message {
-    color: var(--font-color1);
+/* completing and deleting message */
+.completing-message,
+.deleting-message {
     font-size: var(--medium-font);
     padding: 20px;
     margin-bottom: 5px;
@@ -235,6 +236,12 @@ i {
     text-align: center;
     font-weight: bold;
     animation: fadeMessage 1.5s forwards;
+}
+.completing-message {
+    color: var(--green2);
+}
+.deleting-message {
+    color: var(--red1);
 }
 
 @keyframes fadeMessage {
