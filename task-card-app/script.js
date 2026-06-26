@@ -8,6 +8,8 @@ const completedBtn = document.querySelector(".completed-tasks");
 
 // keeps track of the currently selected filter
 let currentFilter = "active";
+// stores task card's order
+let taskOrder = 0;
 
 
 // active tasks is selected by default
@@ -66,6 +68,29 @@ function updateTasks() {
     tasksProgressBar();
 }
 
+// SORTING PINNED AND UNPINNED TASKS
+function sortTasks() {
+    const cards = [...taskContainer.children];
+
+    cards.sort((a, b) => {
+
+        const aPinned = a.classList.contains("pinned");
+        const bPinned = b.classList.contains("pinned");
+
+        // pinned  tasks stays on top
+        if (aPinned && !bPinned) return -1;
+        if (!aPinned && bPinned) return 1;
+
+        return Number(a.dataset.order) - Number(b.dataset.order);
+        
+    });
+
+    cards.forEach(card => {
+        taskContainer.appendChild(card);
+    });
+
+}
+
 
 
 // ADDING TASK CARDS
@@ -83,10 +108,20 @@ function addFunc() {
     const taskCard = document.createElement("div");
     taskCard.classList.add("task-card");
 
+    taskCard.dataset.order = taskOrder;
+    taskOrder++;
+
     taskCard.innerHTML = `  
       
         <div class="card-all-text">  
-            <p>${taskText}</p>  
+           <div class="task-title">
+                <p>${taskText}</p>
+
+                <button class="pin-task">
+                    <i class="fa-solid fa-thumbtack"></i>
+                </button>
+            </div> 
+            
             <input type="text" class="task-description" placeholder="Add description here...">  
         </div>  
           
@@ -108,7 +143,7 @@ function addFunc() {
     const delTask = taskCard.querySelector(".delete-task");
     const addDes = taskCard.querySelector(".add-description");
     const description = taskCard.querySelector(".task-description");
-
+    const pinTask = taskCard.querySelector(".pin-task");
 
     // marks a task as completed
     taskComplete.addEventListener("click", () => {
@@ -126,6 +161,7 @@ function addFunc() {
 
             taskCard.classList.remove("completing");
 
+            sortTasks();
             updateTasks();
 
             setTimeout(() => {
@@ -149,8 +185,9 @@ function addFunc() {
             delMessage.textContent = "🗑️ Task deleted";
 
             taskContainer.insertBefore(delMessage, taskCard);
-            
+
             taskCard.remove();
+            sortTasks();
 
             setTimeout(() => {
                 delMessage.remove();
@@ -160,7 +197,7 @@ function addFunc() {
 
         }, 350);
 
-        
+
     });
 
 
@@ -194,7 +231,16 @@ function addFunc() {
 
     });
 
+    // pins and unpins a task
+    pinTask.addEventListener("click", () => {
+
+        taskCard.classList.toggle("pinned");
+        sortTasks();
+
+    });
+
     taskContainer.appendChild(taskCard);
+    sortTasks();
     updateTasks();    // refreshes the current filter
     taskInput.value = "";
 

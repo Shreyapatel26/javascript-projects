@@ -40,7 +40,6 @@ body {
     --blue1: #8ec7df;
     --blue2: #427b93;
     --blue3: #19526a;
-    
 
     --font-color1: #dcdcdc;
     --font-color2: #ffffff;
@@ -138,10 +137,6 @@ button {
     animation: slideIn 0.3s ease;
     transition: transform 0.35s ease, opacity 0.35s ease;
 }
-.task-card p {
-    font-size: var(--big-font);
-}
-
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -151,6 +146,33 @@ button {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.task-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.task-card p {
+    font-size: var(--big-font);
+}
+.pin-task{
+    background:none;
+    border:none;
+    cursor:pointer;
+}
+.pin-task i{
+    color: var(--font-color1);
+    font-size:20px;
+}
+.pin-task:hover i{
+    color: var(--red1);
+}
+.task-card.pinned .pin-task i {
+    color: #ffff00;
+}
+.task-card.pinned {
+    background-color: var(--purple3);
 }
 
 .task-description {
